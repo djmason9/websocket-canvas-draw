@@ -80,6 +80,10 @@ DrawingPad = function(options) {
 		}
 	}
 	
+	/**
+	* Alerts you that a user has decided to share with you
+	* @param {Object} data
+	*/
 	function setConfirmShare(data){
 		var message="";
 		
@@ -96,11 +100,11 @@ DrawingPad = function(options) {
 		}
 	}
 	/**
-	 * draws on the shared canvas 
+	 * draws on your's and the shared canvas 
 	 * @param {Object} data
 	 */
 	function draw(data, fromMe){
-		console.log(fromMe)
+
 		if(DP.thisObj[data.id]){
 			var eventType = _eventTypes(data.isTouchDevice),
 			ctx = DP.thisObj[data.id].ctx,
@@ -263,7 +267,9 @@ DrawingPad = function(options) {
 				clientCount++;
 			}
 		}
+		//clear any old lists
 		$(".userListWrapper").remove();
+		
 		//create modal
 		modal = '<div class="modal fade userListWrapper">' +
 		'<div class="modal-header">' +
@@ -277,6 +283,10 @@ DrawingPad = function(options) {
 		'</div>' +
 		'</div>';
 
+		if(clientCount === 0) {
+			alert("There are no other users at this time.");
+		}
+		
 		return clientCount > 0 ? modal : ""; //only show this if there are users to share with
 		
 	}
@@ -308,7 +318,7 @@ DrawingPad = function(options) {
 	}
 	
 	/**
-	 * Determine event types
+	 * Determine event types and assigns the correct event types
 	 */
 	function _eventTypes(isTouchDevice){
 		return {
@@ -416,6 +426,7 @@ DrawingPad = function(options) {
 		ctx.stroke();
 	}
 	//////////////////\ START PUBLIC METHODS \////////////////
+	
 	/**
 	 * Init DrawingPad
 	 */
