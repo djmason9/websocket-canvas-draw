@@ -165,6 +165,7 @@ DrawingPad = function(options) {
 					ctx.lineTo(data.x, data.y);
 					ctx.stroke();
 					ctx.closePath();
+					scratchCtx.clearRect(0, 0, DP.myCanvas.width, DP.myCanvas.height);
 				} else if(fromMe){  
 					ctx.drawImage(DP.scratchCanvas, 0, 0);
 					scratchCtx.clearRect(0, 0, DP.myCanvas.width, DP.myCanvas.height);
